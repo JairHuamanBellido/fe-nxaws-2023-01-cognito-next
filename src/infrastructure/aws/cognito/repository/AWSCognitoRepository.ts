@@ -5,13 +5,14 @@ import {
   CognitoUserPool,
 } from "amazon-cognito-identity-js";
 import { CognitoIdentityCredentials } from "aws-sdk";
-import { inject } from "inversify";
+import { inject, injectable } from "inversify";
 import { AWSCredentialsRepository } from "../../credentials/repository/AWSCredentialsRepository";
 import {
   IAWSCognitoAuthenticationParams,
   IAWSCognitoRepository,
 } from "../interface/IAWSCognitoRepository";
 
+@injectable()
 export class AWSCognitoRepository implements IAWSCognitoRepository {
   private cognitoUserPool: CognitoUserPool;
   constructor(
