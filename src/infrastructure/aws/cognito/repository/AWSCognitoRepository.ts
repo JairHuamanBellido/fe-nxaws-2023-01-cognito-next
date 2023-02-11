@@ -24,7 +24,11 @@ export class AWSCognitoRepository implements IAWSCognitoRepository {
       ClientId: process.env.COGNITO_CLIENT_ID || "",
     });
   }
-  authenticate({ username, password }: IAWSCognitoAuthenticationParams): void {
+  authenticate({
+    username,
+    password,
+    callback,
+  }: IAWSCognitoAuthenticationParams): void {
     const authenticationDetails = new AuthenticationDetails({
       Username: username,
       Password: password,
@@ -52,8 +56,11 @@ export class AWSCognitoRepository implements IAWSCognitoRepository {
         this._awsCredentialsRepository.saveCognitoCredentials(
           congitoCredentials
         );
+
+        callback(null, result.getIdToken().payload.sub);
       },
       onFailure: function (err) {
+        callback(err, null);
         console.error(err);
       },
     });

@@ -1,4 +1,7 @@
-export interface IAWSCognitoAuthenticationParams {
+import { ICallback } from "@/src/core/common/callback/ICallback";
+
+export interface IAWSCognitoAuthenticationParams
+  extends ICallback<any, string | null> {
   readonly username: string;
   readonly password: string;
 }
