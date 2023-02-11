@@ -1,37 +1,67 @@
-import { lato } from "@/styles/font";
 import clsx from "clsx";
-import { FormEvent } from "react";
 import { FormField } from "./Field";
+import { useForm } from "react-hook-form";
+import { IAuthentication } from "@/src/domain/interface/IAuthentication";
+import useAuthentication from "../hooks/useAuthentication";
+import { StyledSubmitButton } from "../index.styles";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 const formStyles = {
   layout: "w-[400px] flex flex-col relative",
 };
 export const Form = () => {
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    formState: { isValid },
+  } = useForm<IAuthentication>();
+  const { mutate, isLoading, isSuccess } = useAuthentication();
+  const onSubmit = (request: IAuthentication) => {
+    mutate(request);
   };
+
+  const { replace } = useRouter();
+
+  useEffect(() => {
+    if (isSuccess) {
+      replace("/");
+    }
+  }, [isSuccess]);
+
+  if (isSuccess) return <p>Correecto!!</p>;
   return (
-    <form className={clsx(formStyles.layout)} onSubmit={onSubmit}>
+    <form className={clsx(formStyles.layout)} onSubmit={handleSubmit(onSubmit)}>
       <FormField
         label="Email"
-        htmlFor="email"
-        name="email"
+        htmlFor="username"
         type="email"
-        required
+        {...register("username", { required: true })}
       />
       <FormField
         label="Password"
         htmlFor="password"
-        name="password"
         type="password"
-        required
+        {...register("password", { required: true })}
       />
 
-      <button
-        className={`font-semibold bg-secondary-500 text-base text-primary-500 h-12 mt-6 focus:outline-none focus:outline-primary-900 ${lato.className}`}
-      >
-        LOGIN
-      </button>
+      {isLoading && <p>cargando..</p>}
+      {!isLoading && (
+        <button
+          disabled={!isValid}
+          type="submit"
+          className={clsx(
+            StyledSubmitButton.color,
+            StyledSubmitButton.focus,
+            StyledSubmitButton.layout,
+            StyledSubmitButton.spacing,
+            StyledSubmitButton.text,
+            StyledSubmitButton.disable(!isValid)
+          )}
+        >
+          LOGIN
+        </button>
+      )}
     </form>
   );
 };

@@ -34,5 +34,14 @@ export const StyledRegisterLayout = {
 export const StyledRightLayout = {
   layout: "w-3/5 h-screen relative flex flex-col justify-center",
   spacing: "p-16",
-  background: 'bg-primary-400'
+  background: "bg-primary-400",
+};
+
+export const StyledSubmitButton = {
+  text: `font-semibold text-base text-primary-500`,
+  color: "bg-secondary-500",
+  spacing: "mt-6",
+  layout: "h-12",
+  focus: "focus:outline-none focus:outline-primary-900",
+  disable: (disabled:boolean) => disabled && 'bg-secondary-200 cursor-not-allowed	'
 };
