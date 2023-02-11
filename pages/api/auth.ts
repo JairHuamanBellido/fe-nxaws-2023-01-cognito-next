@@ -9,8 +9,8 @@ export default async function handler(
 ) {
   if (req.method === "POST") {
     const { username, password } = req.body;
-    const congitoRepository = DIContainer.resolve(AuthenticationUseCase);
-    await congitoRepository.execute({
+    const cognitoRepository = DIContainer.resolve(AuthenticationUseCase);
+    await cognitoRepository.execute({
       password,
       username,
       callback: function (err, result) {

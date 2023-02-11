@@ -34,17 +34,17 @@ export class AWSCognitoRepository implements IAWSCognitoRepository {
       Password: password,
     });
 
-    const congitoUser = new CognitoUser({
+    const cognitoUser = new CognitoUser({
       Pool: this.cognitoUserPool,
       Username: authenticationDetails.getUsername(),
     });
 
-    congitoUser.authenticateUser(authenticationDetails, {
+    cognitoUser.authenticateUser(authenticationDetails, {
       onSuccess: (result) => {
         const identityPoolId = process.env.COGNITO_IDENTITY_POOL_ID || "";
         const cognitoUrl = process.env.COGNITO_URL || "";
         const region = process.env.AWS_REGION || "";
-        const congitoCredentials = new CognitoIdentityCredentials(
+        const cognitoCredentials = new CognitoIdentityCredentials(
           {
             IdentityPoolId: identityPoolId,
             Logins: {
@@ -54,7 +54,7 @@ export class AWSCognitoRepository implements IAWSCognitoRepository {
           { region }
         );
         this._awsCredentialsRepository.saveCognitoCredentials(
-          congitoCredentials
+          cognitoCredentials
         );
 
         callback(null, result.getIdToken().payload.sub);
