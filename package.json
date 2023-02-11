@@ -15,6 +15,7 @@
     "@types/react-dom": "18.0.10",
     "amazon-cognito-identity-js": "^6.1.2",
     "aws-sdk": "^2.1309.0",
+    "clsx": "^1.2.1",
     "eslint": "8.33.0",
     "eslint-config-next": "13.1.6",
     "inversify": "^6.0.1",
