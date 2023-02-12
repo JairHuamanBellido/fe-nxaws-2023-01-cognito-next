@@ -27,7 +27,7 @@ export const Form = () => {
     if (isSuccess) {
       replace("/");
     }
-  }, [isSuccess]);
+  }, [isSuccess, replace]);
 
   if (isSuccess) return <p>Correecto!!</p>;
   return (

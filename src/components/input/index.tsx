@@ -1,5 +1,6 @@
-import { lato } from "@/styles/font";
+// eslint-disable-next-line react/display-name
 import { forwardRef, InputHTMLAttributes } from "react";
+import { lato } from "@/styles/font";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {}
 export const Input = forwardRef<null, InputProps>(({ ...props }, ref) => {
@@ -12,3 +13,4 @@ export const Input = forwardRef<null, InputProps>(({ ...props }, ref) => {
     />
   );
 });
+Input.displayName = 'Input'

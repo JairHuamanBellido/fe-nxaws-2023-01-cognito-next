@@ -11,7 +11,7 @@ export const SignUpContainer = () => {
           StyledRegisterLayout.textStyle.font
         )}
       >
-        Don't have an account?{" "}
+        Don't have an account?
         <Link
           className={clsx(
             StyledRegisterLayout.linkStyle.color,

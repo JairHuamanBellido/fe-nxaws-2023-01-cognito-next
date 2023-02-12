@@ -21,8 +21,9 @@ export const FormField = forwardRef<null, FormFieldProps>(
         >
           {label}
         </label>
-        <Input ref={ref}  {...props} />
+        <Input ref={ref} {...props} />
       </div>
     );
   }
 );
+FormField.displayName = 'FormField'
