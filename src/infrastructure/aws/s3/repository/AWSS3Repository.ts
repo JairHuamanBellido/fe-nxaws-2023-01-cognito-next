@@ -18,13 +18,13 @@ export class AWSS3Repository implements IAWSS3Repository {
 
   async upload({
     body,
-    bucketName,
     filename,
   }: AWSS3UploadFileParams): Promise<PutObjectOutput> {
     return await this.S3.putObject({
-      Bucket: bucketName,
+      Bucket: process.env.AWS_S3_BUCKET || "",
       Key: filename,
       Body: body,
+      ACL: "public-read",
     }).promise();
   }
 }
